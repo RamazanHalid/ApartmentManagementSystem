@@ -1,7 +1,7 @@
 <!-- @author Ramazan Halid
      @version 27.12.2020 -->
 <?php
-
+  include "adminMainPage.php";
 $bloks = array("A","B","C","D");
 $apartments = array();
 for ($t=0 ; $t<16; $t++){
@@ -159,7 +159,7 @@ for ($t=0 ; $t<16; $t++){
           if($result->num_rows == 0)
             {
               $sqlCheckBlokAndDoorNo = "SELECT * FROM apartments WHERE '$inputBlok' = blok 
-              AND '$inputDoorNo' = doorNo AND isFull = 1";
+              AND '$inputDoorNo' = doorNo AND apartmentIsFull = 1";
               $result2 = $conn->query($sqlCheckBlokAndDoorNo);
               if($result2->num_rows == 0)
                 {
@@ -174,7 +174,7 @@ for ($t=0 ; $t<16; $t++){
                   if(  $conn->query($sqlInsertionForUserTable) === TRUE )
                   {
                     $last_id = $conn->insert_id;    
-                    $sqlInsertionForApartmentTable = "INSERT INTO apartments (blok,doorNo,userNo,arrivalDate) VALUES
+                    $sqlInsertionForApartmentTable = "INSERT INTO apartments (blok,doorNo,aUserID,aArrivalDate) VALUES
                     ('$inputBlok',
                     '$inputDoorNo',
                       '$last_id',
@@ -246,7 +246,7 @@ for ($t=0 ; $t<16; $t++){
     return $message2;
   }
   
-  include "adminMainPage.php";
+
  ?>
 
 

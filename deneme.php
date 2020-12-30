@@ -11,37 +11,40 @@
     }
     echo "connection successfuly * ";
 
-    $inputName               = "Ramazan";
-    $inputEmail              = "raqwemadasdfgdadwzan@gmail.com";
-    $inputPassword           = "123123";
-    $inputPhone              = "12312312312";
-    $inputPhone2             = "12312312312";
-    $inputArrivalDate        = "2020-10-10"; 
-    $inputBlok               = "B";
-    $inputDoorNo             = "3";
+    $inputName               = "Ramazanwe";
+    $inputAmount             = 1000;
+    $inputDescription        = "Standart Dues wqe";
+    $inputAdminNo            = 2; 
+    $inputDate               = "2020-12-12";
+    
 
 
-    $a="INSERT INTO users ( uname, eMail,
-    phoneNo,phoneNo2,pwd)
+    $a="INSERT INTO dues ( duesName, amount,
+    duesDescription,adminNo, startsDate)
                VALUES ('$inputName',
-                       '$inputEmail',   
-                       '$inputPhone',
-                       '$inputPhone2',    
-                       '$inputPassword'
+                       '$inputAmount',   
+                       '$inputDescription',
+                       '$inputAdminNo',
+                       '$inputDate'
                       )";
 
-    if(  $conn->query($a) === TRUE ){
+    if($conn->query($a) === TRUE ){
         $last_id = $conn->insert_id;    
-        echo "New user is  created! * .$last_id";
-        
-       $b = "INSERT INTO apartments (blok,doorNo,userNo,arrivalDate) VALUES
-               ('$inputBlok',
-               '$inputDoorNo',
-                 '$last_id',
-               '$inputArrivalDate')";
-        if(  $conn->query($b) === TRUE ){
-            echo "apartment created";
+        echo "New user is  created! ";
+        $sqlForAllUsers ="SELECT users.userID FROM users, apartments 
+        WHERE users.userID = apartments.aUserID AND apartments.apartmentIsFull = 1 ";
+        $result = $conn->query($sqlForAllUsers);
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $c = $row["userID"];
+                $b = "INSERT INTO payments (userNo,duesID) VALUES
+                      ( '$c',
+                        '$last_id')";
+               if(  $conn->query($b) === TRUE ){
+                   echo "apartment created";
+                }
         }
+    }
     }
     else {
         echo "creating  faild * ";
