@@ -1,4 +1,7 @@
 <?php 
+include "adminMainPage.php";
+ session_start();
+
  $servername   = "localhost";
  $username     = "root";
  $password     = "";
@@ -9,24 +12,21 @@
     {
      die("Connection failed: " . $conn->connect_error);
     }
-    $inputAdminEmail             = "";
-    $inputAdminPassword          = "";
+   
     $inputDuesName               = "";
     $inputAmount                 = 1;
     $inputDescription            = "";
     $inputDate                   = "";
 
-    $inputAdminEmailError             = "";
-    $inputAdminPasswordError          = "";
+   
     $inputDuesNameError               = "";
     $inputAmountError                 = "";
     $inputDescriptionError            = "";
     $inputDateError                   = "";
 
     $inputDuesNameForHoldInfo               = "";
-    $inputAdminEmailForHoldInfo             = "";
     $inputDescriptionForHoldInfo            = "";
-    $message  = "";
+    $message   = "";
     $message2  = "";
 
      //This function for user interface inputs validation.
@@ -56,27 +56,7 @@
          $inputDuesName = "";
         }
       }
-       //**************************** */
-     if (empty($_POST['email'])) {
-        $inputAdminEmailError = "Email is required";
-      }else {
-        $inputAdminEmail      = test_input($_POST['email']);
-        $inputAdminEmailForHoldInfo = $inputAdminEmail;
-        if (!filter_var($inputAdminEmail, FILTER_VALIDATE_EMAIL)) {
-          $inputAdminEmailError = "Invalid email format";
-          $inputAdminEmailForHoldInfo = $inputAdminEmail;
-          $inputAdminEmail = "";
-          echo "wwrwerwer";
-        }
-      }
-      //**************************** */
-     if (empty($_POST['pwd'])) {
-        $inputAdminPasswordError = "Password  is required";
-      }else {
-       
-        $inputAdminPassword      = test_input($_POST['pwd']);
-        
-      }
+  
       //**************************** */
      if (empty($_POST['startsDate'])) {
         $inputDateError = "Starts date is required";
@@ -101,21 +81,23 @@
         }
       }
       //**************************** */
-     if (empty($_POST['amount'])) {
+     if (empty($_POST['amount'])) 
+      {
       $inputAmountError = "Amountis required";
-    }else {
+       }
+     else {
       $inputAmount      = $_POST['amount'];
     }
-    }
-     
-    $sqlForCheckAdminEmail = "SELECT * FROM admins WHERE '$inputAdminEmail' = admins.eMail 
-    AND '$inputAdminPassword' = admins.pwd";
-    $result = $conn->query($sqlForCheckAdminEmail);
+  }
+  
+
+    $adminId = $_SESSION["adminID"];
+  
+    $sqlForCheckAdminID = "SELECT * FROM admins WHERE admins.no = '$adminId'";
+    $result = $conn->query($sqlForCheckAdminID);
     if ($result->num_rows > 0 )
      {
-   
          while($row = $result->fetch_assoc()){
-         $adminId = $row["no"];
          $sqlInsertDues = "INSERT INTO dues (duesName, amount, duesDescription, 
          adminNo , startsDate) VALUES (
                 '$inputDuesName',
@@ -143,11 +125,11 @@
                       '$last_id')";
                       if($conn->query($sqlForPaymentTable ) === TRUE){
                         
-                        $message = "apartment created";
+                        $message = "Dues assigned";
                         $message2 = successMessage($message);
                       }
                       else {
-                        $message = "apartment not created";
+                        $message = "Dues did not assign";
                         $message2 = failMessage($message);
                       }
                   }
@@ -164,7 +146,7 @@
      }
     else
      {   
-         $message = "Admin's informations are not correct";
+         $message = "nothing";
          $message2= failMessage($message);
      }
 
@@ -188,7 +170,7 @@
 
 
       $conn->close();
- include "adminMainPage.php";
+ 
 
 ?>
 <!DOCTYPE html>
@@ -213,22 +195,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="email" class="col-sm-3 control-label">Admin E-mail</label>
-                    <div class="col-sm-9">
-                        <input type="email" name="email" placeholder="Email" class="form-control"
-                        value="<?php echo $inputAdminEmailForHoldInfo; ?>">
-                        <span class="error"><?php echo $inputAdminEmailError;?></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-3 control-label">Admin Password</label>
-                    <div class="col-sm-9">
-                        <input type="password" name="pwd" placeholder="Password" class="form-control"
-                        value="<?php echo $inputAdminPassword; ?>">
-                        <span class="error"><?php echo $inputAdminPasswordError;?></span>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="amount" class="col-sm-3 control-label">Amount</label>
                     <div class="col-sm-9">
                         <input type="number" name="amount" placeholder="amount" class="form-control" min="1"
@@ -241,8 +207,7 @@
                     <div class="col-sm-9">
                         <input type="tel" name="description"  placeholder="Description" class="form-control" 
                         value="<?php echo $inputDescription; ?>"  >
-                        <span class="error"><?php echo $inputDescriptionError;?></span>
-                     
+                        <span class="error"><?php echo $inputDescriptionError;?></span> 
                     </div>
                 </div>
                 <div class="form-group">
@@ -253,13 +218,7 @@
                         <span class="error"><?php echo $inputDateError;?></span>
                     </div>
                 </div>
-                
-               
-                
-                  <?php echo $message2; ?>
-                  
-                
-       
+                <?php echo $message2; ?>
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
                         <button type="submit" class="btn btn-primary btn-block">Register</button>

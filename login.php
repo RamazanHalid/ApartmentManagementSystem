@@ -1,4 +1,5 @@
 <?php
+session_start();
  //declaration of database informations.
  $servername   = "localhost";
  $username     = "root";
@@ -64,10 +65,10 @@
      
       //This query created to check the user login information from the database.
       $sql1 = "SELECT * FROM admins WHERE '$inputUserEMail' = eMail AND 
-      '$inputUserPassword' = pwd";
+      '$inputUserPassword' = pwd AND isActive = 1";
       $result = $conn->query($sql1);
-      $sql2 = "SELECT * FROM users WHERE '$inputUserEMail' = eMail AND 
-      '$inputUserPassword' = pwd";
+      $sql2 = "SELECT * FROM users , apartments WHERE '$inputUserEMail' = eMail AND 
+      '$inputUserPassword' = pwd AND apartments.apartmentIsFull = 1";
       $result2 = $conn->query($sql2);
       // This if statment controled position of user(Admin,User)
       // Host and Tenant have same user interface.
@@ -75,6 +76,9 @@
        {     
         if ($result->num_rows > 0) 
          {
+           $row = $result->fetch_assoc();
+
+           $_SESSION["adminID"] = $row["no"];
            header("Location: adminMainPage.php");
            exit();
          } 
@@ -85,8 +89,12 @@
        }
       elseif($inputPosition == "user")
         {
+        
            if ($result2->num_rows > 0) 
             {
+              $row2 = $result2->fetch_assoc();
+
+             $_SESSION["forUserID"] = $row2["userID"];
               header("Location: userMainPage.php");
               exit();
             } 
@@ -95,6 +103,7 @@
                 $IncorrectInfo = "<br>Login informations are incorrect!";
             }
         }
+       
       $conn->close();   
     }   
 
@@ -132,9 +141,6 @@
 
 								<div class="form-group">
 									<label for="pwd">Password
-										<a href="forgot.html" class="float-right">
-											Forgot Password?
-										</a>
 									</label>
 									<input id="password" type="password" class="form-control" name="pwd" value="<?php echo $inputUserPassword; ?>" required data-eye>
                                     <p><span class="error"><?php echo $inputUserPasswordError; ?></span></p>
@@ -142,25 +148,21 @@
 								</div>
 
 								<div class="form-group" >
-                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="userPosition" id="inlineRadio1" value="admin"
-                                  <?php if (isset($inputPosition) && $inputPosition=="admin") echo "checked"; ?> checked >
-                                  <label class="form-check-label" for="admin">Admin</label>
-                                 </div>
-                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="userPosition" id="inlineRadio2" value="user"
-                                  <?php if (isset($inputPosition) && $inputPosition=="user") echo "checked"; ?>>
-                                  <label class="form-check-label" for="user">User</label>
-                                 </div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="userPosition" id="inlineRadio1" value="admin"
+                    <?php if (isset($inputPosition) && $inputPosition=="admin") echo "checked"; ?> checked >
+                    <label class="form-check-label" for="admin">Admin</label>
+                   </div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="userPosition" id="inlineRadio2" value="user"
+                    <?php if (isset($inputPosition) && $inputPosition=="user") echo "checked"; ?>>
+                    <label class="form-check-label" for="user">User</label>
+                   </div>
 								</div>
-
 								<div class="form-group m-0">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    Login
-									</button>
+                 <button type="submit" class="btn btn-primary btn-block">Login </button>
 								</div>
-                                <p style="color:red"><strong><?php echo $IncorrectInfo; ?></p></strong>
-								
+                <p style="color:red"><strong><?php echo $IncorrectInfo; ?></p></strong>
 							</form>
 						</div>
 					</div>

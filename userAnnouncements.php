@@ -1,10 +1,11 @@
-<?php   include "adminMainPage.php";
+<?php   include "userMainPage.php";
 
 //declaration of database informations.
 $servername   = "localhost";
 $username     = "root";
 $password     = "";
 $databasename = "apartment";
+
 
 $conn = new mysqli($servername, $username, $password, $databasename);
 
@@ -13,32 +14,17 @@ $conn = new mysqli($servername, $username, $password, $databasename);
     {
       die("Connection failed: " . $conn->connect_error);
     }
- $sqlForVaultCash = "SELECT SUM(dues.amount) as moneySum FROM payments , dues WHERE dues.duesID = payments.duesID AND  payments.isPaid = 1";
+ $sqlForVaultCash = "SELECT * FROM announcement
+  ORDER BY announcement.cTime DESC";
  $result = $conn->query($sqlForVaultCash);
- $totalMoney = 0;
- $totalPayable = 0;
- if ($result->num_rows > 0 )
-  {
-     $row = $result->fetch_assoc();
-    $totalMoney = $row["moneySum"];
-  }
- $sqlForTotalOutgoing = "SELECT SUM(oAmount) as payableSum FROM outgoing WHERE isItPaid = 0";
- $result2 = $conn->query($sqlForTotalOutgoing);
- if ($result2->num_rows > 0) 
-  {
-     $row2 = $result2->fetch_assoc();
-     $totalPayable = $row2["payableSum"];
-  }
- $caseMoney = $totalMoney - $totalPayable;
 
+ 
+ 
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
- <head>
+<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Home Page </title>
@@ -51,32 +37,38 @@ $conn = new mysqli($servername, $username, $password, $databasename);
   <script src="//code.jquery.com/jquery.min.js"></script>
   <style>
   .reee {
-      padding-left: 335px;
+      padding-left: 350px;
+      padding-right: 100px;
       padding-top : 50px;
   }
   </style>
   
  </head>
  <body>
-   <div class="reee">
-    <div class="row">
-     <div class="table-responsive col-md-6">
-      <h2>Vault Cash</h2>
-      <table class="table" style="width 40%">
-       <tr class="table-primary">
-        <th>Total Incoming:</th>
-        <td><?php echo $totalMoney." TL"; ?></td>
-       </tr>
-       <tr class="table-danger">
-        <th>Total Outgoing:</th>
-        <td><?php echo $totalPayable. " TL"; ?></td>
-       </tr>
-       <tr class="table-success">
-        <th>Money in the case:</th>
-        <td><?php echo $caseMoney. " TL"; ?></td>
-       </tr>      
-     </div>
-   </div>
-   </div>
- </body>
+
+
+  <div class="reee">
+   <div class="row" >
+    <div class="table-responsive" >
+     <h2>Announcements:</h2>
+     <table class="table" >
+      <tr class="table-secondary">
+       <th>  Announcement Date:    </th>
+       <td> Description:      </td>
+      </tr>
+
+      <?php if ($result->num_rows > 0 ) {
+            while($row=$result->fetch_assoc()){
+
+      ?> 
+    <tr class="table-info">
+     <th><?php echo $row["date"]; ?></th>
+     <td><?php echo $row["theText"]; ?></td>
+    </tr>
+    <?php }} ?>
+   </table>
+  </div>
+</div>
+</div>
+</body>
 </html>

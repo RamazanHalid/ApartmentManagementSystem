@@ -43,7 +43,8 @@
      { 
        if($row["apartmentIsFull"] == 1)
        {
-        echo "<tr class=table-success><td>" .$row["userID"]. "</td><td>" 
+        echo "<tr class=table-success><td>" 
+        .$row["userID"]. "</td><td>" 
         .$row["uname"]."</td><td>". $row["blok"]."</td><td>".$row["doorNo"]."</td><td>".
         $row["eMail"]."</td><td>" 
         .$row["phoneNo"]."</td><td>". $row["phoneNo2"]."</td><td>".$row["aArrivalDate"]."</td>
@@ -97,6 +98,7 @@
  </head>
  <body>
  
+
   <script>
      $(document).ready(function(){
        $("#myInput").on("keyup", function() {

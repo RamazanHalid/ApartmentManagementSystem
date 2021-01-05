@@ -1,12 +1,12 @@
 <!-- @author Ramazan Halid
      @version 27.12.2020 -->
 <?php
-  include "adminMainPage.php";
-$bloks = array("A","B","C","D");
-$apartments = array();
-for ($t=0 ; $t<16; $t++){
-   $apartments[$t] = $t + 1;
-}
+   include "adminMainPage.php";
+   $bloks = array("A","B","C","D");
+   $apartments = array();
+   for ($t=0 ; $t<16; $t++){
+      $apartments[$t] = $t + 1;
+   }
 
 
      
@@ -40,7 +40,7 @@ for ($t=0 ; $t<16; $t++){
    $inputpwdForHoldsInfo                = "";
    $inputArrivalDateForHoldsInfo        = ""; 
    $inputBlokForHoldsInfo               = "";
-   $inputDoorNoForHoldsInfo        = "";
+   $inputDoorNoForHoldsInfo             = "";
   
    $message                 = "";
    $message2                = "";
@@ -135,7 +135,7 @@ for ($t=0 ; $t<16; $t++){
      }else {
        $inputDoorNo      = test_input($_POST['doorNo']);
      }
-  
+    }
 
      $conn = new mysqli($servername, $username, $password, $databasename);
      if ($conn->connect_error) 
@@ -171,16 +171,19 @@ for ($t=0 ; $t<16; $t++){
                                      '$inputPhone2',    
                                      '$inputPassword'
                                     )";
+                                   
                   if(  $conn->query($sqlInsertionForUserTable) === TRUE )
-                  {
-                    $last_id = $conn->insert_id;    
+                  { 
+                    $last_id = $conn->insert_id;   
+                    $inputArrivalDate; 
+                    
                     $sqlInsertionForApartmentTable = "INSERT INTO apartments (blok,doorNo,aUserID,aArrivalDate) VALUES
                     ('$inputBlok',
                     '$inputDoorNo',
                       '$last_id',
                     '$inputArrivalDate')";
     
-                    if(  $conn->query($sqlInsertionForApartmentTable) === TRUE )
+                    if( $conn->query($sqlInsertionForApartmentTable) === TRUE )
                      {
                       $message = "User creation is success!";
                       $message2 = successMessage($message);
@@ -207,12 +210,13 @@ for ($t=0 ; $t<16; $t++){
                      }
     
                   }               
-                }
+                
               else 
                {
                    $message = "Apartment is full!";
                    $message2= failMessage($message);
                }
+              
             }
           else 
             {
@@ -225,14 +229,14 @@ for ($t=0 ; $t<16; $t++){
         $message = "Fill al of inputs!";
         $message2 = failMessage($message);
       }
-
+    }
 
 
 
 
     $conn->close();
    
-   }
+   
   function successMessage($message){
     $message2 = "<div class='alert alert-success'>
     <strong>Success!</strong> $message

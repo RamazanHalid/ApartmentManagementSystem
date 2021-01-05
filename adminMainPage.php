@@ -1,9 +1,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+ <head>
 	<meta charset="utf-8">
-	<meta name="author" content="Kodinger">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Admin Page </title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,36 +14,41 @@
   <script src="//code.jquery.com/jquery.min.js"></script>
   <link rel="stylesheet" href="adminMainPage.css">
   
-</head>
-<body>
+ </head>
+ <body>
 
 
 
-<div class="sidebar-container" id="asdasd">
-  <div class="sidebar-logo">
-    Apartment Management Admin
-  </div>
-  <ul class="sidebar-navigation">
+  <div class="sidebar-container" id="asdasd">
+   <div class="sidebar-logo">
+    Apartment Management
+   </div>
+   <ul class="sidebar-navigation">
     <li class="header">HOME</li>
     <li>
       <a href="adminHomePage.php" >
-        <i class="fa fa-home" aria-hidden="true"></i> Homepage
+        <i class="fa fa-home" aria-hidden="true"></i> Home page
       </a>
     </li>
     <li>
-      <a href="paidList.php" >
-        <i class="fa fa-home" aria-hidden="true"></i> Paid List
+      <a href="historyPaymentListForAdmin.php" >
+        <i class="fa fa-home" aria-hidden="true"></i>History of Paid Dues
       </a>
     </li>
     <li>
       <a href="unPaidList.php" >
-        <i class="fa fa-home" aria-hidden="true"></i> Unpaid List
+        <i class="fa fa-home" aria-hidden="true"></i>Unpaid Dues
       </a>
     </li>
-    <li class="header">USERS MENU</li>
+    <li>
+      <a href="addAnnouncement.php" >
+        <i class="fa fa-home" aria-hidden="true"></i>Add Announcement
+      </a>
+    </li>
+    <li class="header">Members</li>
     <li>
       <a href="userList.php">
-        <i class="fa fa-users" aria-hidden="true"></i>  List Users
+        <i class="fa fa-users" aria-hidden="true"></i>List
       </a>
     </li>
     <li>
@@ -54,36 +58,29 @@
     </li>
     <li>
       <a href="userUpdate.php">
-        <i class="fa fa-info-circle" aria-hidden="true"></i>Updation
+        <i class="fa fa-info-circle" aria-hidden="true"></i>Moving Out
       </a>
     </li>
-    
-   
-    <li class="header">ADMIN MENU</li>
+    <li class="header">Admins</li>
     <li>
       <a href="adminList.php" >
-        <i class="fa fa-home" aria-hidden="true"></i> Admin List 
+        <i class="fa fa-home" aria-hidden="true"></i> Admins List 
       </a>
     </li>
     <li>
       <a href="adminAdd.php" >
-        <i class="fa fa-home" aria-hidden="true"></i> Add Admin
+        <i class="fa fa-home" aria-hidden="true"></i> Add New Admin
       </a>
     </li>
     <li>
       <a href="adminDelete.php" >
-        <i class="fa fa-home" aria-hidden="true"></i> Delete Admin
+        <i class="fa fa-home" aria-hidden="true"></i> Deletion
       </a>
     </li>
-    <li class="header">DUES MENU</li>
+    <li class="header">DUES</li>
     <li>
       <a href="duesAdd.php" >
-        <i class="fa fa-home" aria-hidden="true"></i> Add New Dues
-      </a>
-    </li>
-    <li>
-      <a href="duesUpdate.php" >
-        <i class="fa fa-home" aria-hidden="true"></i> Update a Dues
+        <i class="fa fa-home" aria-hidden="true"></i> Assign Dues
       </a>
     </li>
     <li>
@@ -91,24 +88,24 @@
         <i class="fa fa-home" aria-hidden="true"></i> Add Outgoing
       </a>
     </li>
-   
-    
+    <li>
+      <a href="adminOutgoingUnpaidList.php" >
+        <i class="fa fa-home" aria-hidden="true"></i>Unpaid Outgoing List
+      </a>
+    </li>
+    <li>
+      <a href="adminOutgoingPage.php" >
+        <i class="fa fa-home" aria-hidden="true"></i>Outgoing List
+      </a>
+    </li> 
     <li class="header">Other</li>
     <li>
       <a href="login.php" id="logout">
         <i class="fa fa-home" aria-hidden="true" ></i> Log out
       </a>
-    </li>
-  </ul>
-</div>
-
-<div class="content-container" id="demo">
-
-  <div class="container-fluid">
-
+     </li>
+   </ul>
   </div>
-
-</div>
-  
-</body>
+ </div>
+ </body>
 </html>
