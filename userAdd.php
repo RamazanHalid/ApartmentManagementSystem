@@ -295,7 +295,7 @@
                 <div class="form-group">
                     <label for="userPhone" class="col-sm-3 control-label">Phone Number</label>
                     <div class="col-sm-9">
-                        <input type="tel" name="userPhone" placeholder="Phone Number" class="form-control"
+                        <input type="tel" name="userPhone" placeholder="Phone Number" class="form-control" minlength=11 maxlength=11
                         value="<?php echo $inputPhone; ?>" >
                         <span class="error"><?php echo $inputPhoneError;?></span>
                     </div>
@@ -303,7 +303,7 @@
                 <div class="form-group">
                     <label for="userPhone2" class="col-sm-3 control-label">Phone Number</label>
                     <div class="col-sm-9">
-                        <input type="tel" name="userPhone2"  placeholder="2.Phone Number" class="form-control" 
+                        <input type="tel" name="userPhone2"  placeholder="2.Phone Number" class="form-control"  minlength=11 maxlength=11
                         value="<?php echo $inputPhone2; ?>"  >
                      
                     </div>
