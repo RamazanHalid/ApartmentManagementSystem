@@ -225,7 +225,7 @@ function test_input($data)
                 <div class="form-group">
                     <label for="userPhone" class="col-sm-3 control-label">Phone Number</label>
                     <div class="col-sm-9">
-                        <input type="tel" name="phone" placeholder="Phone Number" class="form-control"
+                        <input type="tel" name="phone" placeholder="Phone Number" class="form-control" minlength=11 maxlength=11
                         value="<?php echo $inputAdminPhone; ?>" >
                         <span class="error"><?php echo $inputAdminPhoneError;?></span>
                     </div>
