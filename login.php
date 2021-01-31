@@ -16,8 +16,6 @@ session_start();
  $inputEmailForHolds     = "";
 
  
-    //This fuction will check each _POST variable.
-      //This function for security.
       function test_input($data)
        {
         $data = trim($data);
@@ -25,7 +23,6 @@ session_start();
         $data = htmlspecialchars($data);
         return $data;
        }
- // Check the user informations from database if true, goes to new php file . If not write a error message
  if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
 
@@ -69,7 +66,7 @@ session_start();
            $row = $result->fetch_assoc();
 
            $_SESSION["adminID"] = $row["no"];
-           header("Location: adminMainPage.php");
+           header("Location: adminHomePage.php");
            exit();
          } 
         else 
@@ -85,7 +82,7 @@ session_start();
               $row2 = $result2->fetch_assoc();
 
              $_SESSION["forUserID"] = $row2["userID"];
-              header("Location: userMainPage.php");
+              header("Location: userHomePage.php");
               exit();
             } 
            else 
