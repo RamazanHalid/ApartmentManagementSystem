@@ -1,10 +1,6 @@
 <?php   include "userMainPage.php";
 
-//declaration of database informations.
-$servername   = "localhost";
-$username     = "root";
-$password     = "";
-$databasename = "apartment";
+include "connection.php";
 
 $userName = "";
 $userEmail = "";
@@ -17,13 +13,7 @@ $loginUserID      =  $_SESSION["forUserID"];
 $totalMoney = 0;
 $totalPayable = 0;
 
-$conn = new mysqli($servername, $username, $password, $databasename);
 
- // Check database connection
- if ($conn->connect_error) 
-    {
-      die("Connection failed: " . $conn->connect_error);
-    }
  $sqlForVaultCash = "SELECT SUM(dues.amount) as moneySum FROM payments , dues WHERE dues.duesID = payments.duesID 
  AND  payments.isPaid = 1";
  $result = $conn->query($sqlForVaultCash);

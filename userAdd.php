@@ -2,6 +2,8 @@
      @version 27.12.2020 -->
 <?php
    include "adminMainPage.php";
+   include "connection.php";
+
    $bloks = array("A","B","C","D");
    $apartments = array();
    for ($t=0 ; $t<16; $t++){
@@ -45,11 +47,7 @@
    $message                 = "";
    $message2                = "";
 
-   //These information for connection my database
-   $servername   = "localhost";
-   $username     = "root";
-   $password     = "";
-   $databasename = "apartment";
+  
 
        //This function for user interface inputs validation.
    function test_input($data)
@@ -137,11 +135,7 @@
      }
     }
 
-     $conn = new mysqli($servername, $username, $password, $databasename);
-     if ($conn->connect_error) 
-      {
-       die("Connection failed: " . $conn->connect_error);
-      }
+    
          
      
       
