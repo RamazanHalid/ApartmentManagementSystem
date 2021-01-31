@@ -1,10 +1,7 @@
 <?php
 session_start();
  //declaration of database informations.
- $servername   = "localhost";
- $username     = "root";
- $password     = "";
- $databasename = "apartment";
+ include "connection.php";
  
  $inputUserEMailError    = "";
  $inputUserPasswordError = "";
@@ -18,14 +15,7 @@ session_start();
 
  $inputEmailForHolds     = "";
 
- // Create database connection
- $conn = new mysqli($servername, $username, $password, $databasename);
-
- // Check database connection
- if ($conn->connect_error) 
-    {
-      die("Connection failed: " . $conn->connect_error);
-    }
+ 
     //This fuction will check each _POST variable.
       //This function for security.
       function test_input($data)

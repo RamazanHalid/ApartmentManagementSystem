@@ -1,19 +1,10 @@
 <?php   include "userMainPage.php";
 
-//declaration of database informations.
-$servername   = "localhost";
-$username     = "root";
-$password     = "";
-$databasename = "apartment";
+include "connection.php";
 
 
-$conn = new mysqli($servername, $username, $password, $databasename);
 
- // Check database connection
- if ($conn->connect_error) 
-    {
-      die("Connection failed: " . $conn->connect_error);
-    }
+ 
  $sqlForVaultCash = "SELECT * FROM announcement
   ORDER BY announcement.cTime DESC";
  $result = $conn->query($sqlForVaultCash);

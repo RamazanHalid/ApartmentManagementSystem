@@ -1,11 +1,8 @@
 <?php 
 session_start();
  include "adminMainPage.php";
- //These information for connection my database
- $servername   = "localhost";
- $username     = "root";
- $password     = "";
- $databasename = "apartment";
+ include "connection.php";
+
 
  $inputLeavingDate = "";
  $inputUserId      = "";
@@ -55,15 +52,6 @@ if (empty($_POST['ramo'])) {
  
 }
 
-
- 
-
- $conn = new mysqli($servername, $username, $password, $databasename);
- if ($conn->connect_error) 
-  {
-   die("Connection failed: " . $conn->connect_error);
-  }
-   
  
   
 

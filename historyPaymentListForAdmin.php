@@ -1,12 +1,7 @@
 <?php 
 session_start();
  include "adminMainPage.php";
- //These information for connection my database
- $servername   = "localhost";
- $username     = "root";
- $password     = "";
- $databasename = "apartment";
-
+ include "connection.php";
 
 
  $users             = array();
@@ -33,12 +28,7 @@ function test_input($data)
 
 $counter = 0;
 
- 
- $conn = new mysqli($servername, $username, $password, $databasename);
- if ($conn->connect_error) 
-  {
-   die("Connection failed: " . $conn->connect_error);
-  }
+
 
 
   $sql1 = "SELECT * FROM users, apartments , dues , payments WHERE apartments.aUserID = users.userID 
