@@ -1,5 +1,5 @@
 <?php 
- session_start();
+
  include "adminMainPage.php";
  //These information for connection my database
  include "connection.php";
