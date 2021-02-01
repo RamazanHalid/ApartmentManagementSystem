@@ -1,3 +1,7 @@
+<?php
+include "loginCheck.php";
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +63,7 @@
     
     <li class="header">Other</li>
     <li>
-      <a href="login.php" id="logout">
+      <a href="logout.php" id="logout">
         <i class="fa fa-home" aria-hidden="true" ></i> Log out
       </a>
     </li>

@@ -1,7 +1,6 @@
 <?php   
 include "userMainPage.php";
 include "connection.php";
-include "loginCheck.php";
 
 $userName = "";
 $userEmail = "";

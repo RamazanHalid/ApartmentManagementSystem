@@ -2,7 +2,6 @@
 
  include "userMainPage.php";
  include "connection.php";
- include "loginCheck.php";
  $loginUserID      =  $_SESSION["id"];
  $inputFile        = "";
  $inputUserId      = "";
