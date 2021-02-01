@@ -1,6 +1,7 @@
-<?php   include "userMainPage.php";
-
+<?php   
+include "userMainPage.php";
 include "connection.php";
+include "loginCheck.php";
 
 $userName = "";
 $userEmail = "";
@@ -8,9 +9,9 @@ $userBlok =  "";
 $userDoorNo = "";
 $userPhone  = "";
 $userArrivalDate = "";
-session_start();
-$loginUserID      =  $_SESSION["forUserID"];
-$totalMoney = 0;
+
+$loginUserID  =  $_SESSION["id"];
+$totalMoney   = 0;
 $totalPayable = 0;
 
 

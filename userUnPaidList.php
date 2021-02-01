@@ -1,10 +1,11 @@
 <?php 
-session_start();
+
  include "userMainPage.php";
  include "connection.php";
+ include "loginCheck.php";
 
 
- $loginUserID      =  $_SESSION["forUserID"];
+ $loginUserID      =  $_SESSION["id"];
  $inputFile        = "";
  $inputUserId      = "";
  $inputPaymentId   = "";

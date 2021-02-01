@@ -10,7 +10,7 @@ session_start();
  $IncorrectInfo          = "";
  
  $inputUserEMail         = "";
- $inputPosition          = "";
+ $inputPosBition          = "";
  $inputUserPassword      = "";
 
  $inputEmailForHolds     = "";
@@ -81,7 +81,9 @@ session_start();
             {
               $row2 = $result2->fetch_assoc();
 
-             $_SESSION["forUserID"] = $row2["userID"];
+             $_SESSION["id"] = $row2["userID"];
+             $_SESSION["email_"] = $row2["eMail"];
+
               header("Location: userHomePage.php");
               exit();
             } 
