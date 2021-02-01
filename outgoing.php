@@ -1,6 +1,6 @@
 <?php 
 include "adminMainPage.php";
- session_start();
+
 
  include "connection.php";
 
