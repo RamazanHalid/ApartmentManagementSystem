@@ -2,7 +2,6 @@
 session_start();
  //declaration of database informations.
  include "connection.php";
- 
  $inputUserEMailError    = "";
  $inputUserPasswordError = "";
  $inputUserPositionError = "";
@@ -46,7 +45,6 @@ session_start();
            
           }
        
-      
       $inputPosition     = test_input($_REQUEST['userPosition']);
 
      
@@ -54,8 +52,8 @@ session_start();
       $sql1 = "SELECT * FROM admins WHERE '$inputUserEMail' = eMail AND 
       '$inputUserPassword' = pwd AND isActive = 1";
       $result = $conn->query($sql1);
-      $sql2 = "SELECT * FROM users , apartments WHERE '$inputUserEMail' = eMail AND 
-      '$inputUserPassword' = pwd AND apartments.apartmentIsFull = 1";
+      $sql2 = "SELECT * FROM users  WHERE '$inputUserEMail' = eMail AND 
+      '$inputUserPassword' = pwd" ;
       $result2 = $conn->query($sql2);
       // This if statment controled position of user(Admin,User)
       // Host and Tenant have same user interface.
@@ -66,12 +64,14 @@ session_start();
            $row = $result->fetch_assoc();
 
            $_SESSION["adminID"] = $row["no"];
+          
+
            header("Location: adminHomePage.php");
            exit();
          } 
         else 
          {
-             $IncorrectInfo = "<br>Login informations are incorrect!";
+             $IncorrectInfo = "<br>Login informations are incorrect! or Admin moved out!";
          }
        }
       elseif($inputPosition == "user")
@@ -83,9 +83,17 @@ session_start();
 
              $_SESSION["id"] = $row2["userID"];
              $_SESSION["email_"] = $row2["eMail"];
-
-              header("Location: userHomePage.php");
-              exit();
+              $userId = $row2["userID"];
+             $sql3 = "SELECT * FROM apartments WHERE aUserID = '$userId' AND apartmentIsFull = 1" ;
+              $result3 = $conn->query($sql3);
+              if($result3->num_rows > 0){
+                header("Location: userHomePage.php");
+                exit();
+              }
+              else {
+                $IncorrectInfo = "<br>This member moved out.";
+              }
+             
             } 
            else 
             {
