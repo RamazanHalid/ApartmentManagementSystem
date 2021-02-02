@@ -1,9 +1,6 @@
 <?php 
 
  include "adminMainPage.php";
- include "connection.php";
-
- 
 
  $inputLeavingDate  = "";
  $inputAdminId      = "";
@@ -77,7 +74,7 @@ function failMessage($message){
 <DOCTYPE! html>
 <html>
     <head>
-    <?php include "ext.html"; ?> 
+ 
 
      <link rel="stylesheet" href="ortak.css">
  
