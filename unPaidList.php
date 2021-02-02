@@ -1,5 +1,5 @@
 <?php 
- include "adminMainPage.php";
+// include "adminMainPage.php";
  include "connection.php";
 
  $inputFile        = "";
@@ -45,16 +45,8 @@ if (empty($_POST['ramo'])) {
 }else {
   $inputPaymentId      = test_input($_POST['ramo']);
 }
- 
- 
- 
+
 }
-
-
- 
-
-
-
   $sql1 = "SELECT * FROM users, apartments , dues , payments WHERE apartments.aUserID = users.userID 
   AND users.userID = payments.userNo AND payments.duesID = dues.duesID
   AND apartments.apartmentIsFull=1 AND payments.isPaid = 0 ORDER BY apartments.blok , apartments.doorNo";
@@ -63,25 +55,11 @@ if (empty($_POST['ramo'])) {
 
   $sql2 = "UPDATE payments SET isPaid = 1 , whenPaid = '$currentDate'
    WHERE paymentID = '$inputPaymentId' ";
- 
- if ($conn->query($sql2) === TRUE) {
-  $message= "Dues is paid";
-  $message2= successMessage($message);
+      
+     
+       
 
- }
-function successMessage($message){
-  $message2 = "<div class='alert alert-success'>
-  <strong>Success!</strong> $message
-</div>";
-  return $message2;
-}
-function failMessage($message){
-  $message2 = "<div class='alert alert-danger'>
-  <strong>Error!</strong> $message
-   </div>";
-  return $message2;
-}
- 
+
 ?>
 
 <DOCTYPE! html>
@@ -195,8 +173,7 @@ function failMessage($message){
         </div>
       </div>
 
-
-      
+     
      <div class="ree">
      
      <div class="form-group">
@@ -256,8 +233,23 @@ function failMessage($message){
          </script>
     </body>
 </html>
-
 <?php 
+ if ($conn->query($sql2) == TRUE) {
+  $message= "Dues is paid";
+  $message2= successMessage($message);
 
- 
-?>  
+ } 
+ function successMessage($message){
+  $message2 = "<div class='alert alert-success'>
+  <strong>Success!</strong> $message
+</div>";
+  return $message2;
+}
+function failMessage($message){
+  $message2 = "<div class='alert alert-danger'>
+  <strong>Error!</strong> $message
+   </div>";
+  return $message2;
+}
+ $conn->close();   
+          ?>

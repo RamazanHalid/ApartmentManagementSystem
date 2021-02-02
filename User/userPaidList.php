@@ -1,7 +1,7 @@
 <?php 
 
  include "userMainPage.php";
- include "connection.php";
+ include "../connection.php";
  $loginUserID      =  $_SESSION["id"];
  $inputFile        = "";
  $inputUserId      = "";
@@ -75,8 +75,8 @@ function failMessage($message){
 <DOCTYPE! html>
 <html>
     <head>
-      <?php include "ext.html";?>
-      <link rel="stylesheet" href="ortak.css">
+
+      <link rel="stylesheet" href="../ortak.css">
 
 </head>
     <body>
