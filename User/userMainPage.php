@@ -61,7 +61,7 @@ include "loginCheck.php";
     
     <li class="header">Other</li>
     <li>
-      <a href="logout.php" id="logout">
+      <a href="../logout.php" id="logout">
         <i class="fa fa-home" aria-hidden="true" ></i> Log out
       </a>
     </li>
