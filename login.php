@@ -87,7 +87,7 @@ session_start();
              $sql3 = "SELECT * FROM apartments WHERE aUserID = '$userId' AND apartmentIsFull = 1" ;
               $result3 = $conn->query($sql3);
               if($result3->num_rows > 0){
-                header("Location: userHomePage.php");
+                header("Location: User/userHomePage.php");
                 exit();
               }
               else {

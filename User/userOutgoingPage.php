@@ -1,7 +1,7 @@
 <?php 
 
    include "userMainPage.php";
-   include "connection.php";
+   include "../connection.php";
 
   
    $outgoingIDs           = array();
@@ -22,7 +22,6 @@
 <DOCTYPE! html>
 <html>
  <head>
- <?php include "ext.html"; ?> 
 
   <style>
       table {
@@ -100,8 +99,7 @@
                   <td><?php echo $outgoingDescription[$t];  ?></td>
                   <td><?php echo $amount[$t]. " TL";        ?></td>
                   <td><?php echo $outgoingStartDate[$t];    ?></td>
-                 </tr>   
-                     
+                 </tr>          
                  <?php }
                 } 
                 
