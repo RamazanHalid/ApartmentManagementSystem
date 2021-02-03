@@ -19,3 +19,25 @@ Announcements:
 
 <img width="724" alt="Screen Shot 2021-02-03 at 11 55 59 AM" src="https://user-images.githubusercontent.com/42031794/106724319-25d71400-6619-11eb-91aa-bcf00f90b535.png">
 
+Some screen shoots from adminside: 
+
+History of paid dues:
+
+<img width="1435" alt="Screen Shot 2021-02-03 at 5 02 30 PM" src="https://user-images.githubusercontent.com/42031794/106757782-d35e1d80-6641-11eb-9eb9-50196fc08f4d.png">
+
+Unpaid dues:
+
+<img width="1435" alt="Screen Shot 2021-02-03 at 5 02 40 PM" src="https://user-images.githubusercontent.com/42031794/106757884-eec92880-6641-11eb-8b28-5fc05600c73d.png">
+
+Member List:
+
+<img width="1435" alt="Screen Shot 2021-02-03 at 5 02 55 PM" src="https://user-images.githubusercontent.com/42031794/106757970-07d1d980-6642-11eb-8ab2-4800c11025b2.png">
+
+Member Registartion page:
+
+<img width="1435" alt="Screen Shot 2021-02-03 at 5 03 09 PM" src="https://user-images.githubusercontent.com/42031794/106758072-2637d500-6642-11eb-8b31-2e4d049a835b.png">
+
+
+Outgoing list:
+
+<img width="1435" alt="Screen Shot 2021-02-03 at 5 03 24 PM" src="https://user-images.githubusercontent.com/42031794/106758142-38b20e80-6642-11eb-8c84-7bb073725d03.png">
