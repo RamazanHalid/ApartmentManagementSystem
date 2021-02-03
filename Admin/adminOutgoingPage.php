@@ -22,7 +22,7 @@
  <head>
 
 
-        <link rel="stylesheet" href="ortak.css">
+        <link rel="stylesheet" href="../ortak.css">
   </head>
   <body>
     <?php if ($result->num_rows > 0) 

@@ -1,22 +1,19 @@
 <?php 
  include "adminMainPage.php";
- $inputLeavingDate = "";
- $inputUserId      = "";
 
- $inputLeavingDateError = "";
- $inputUserIdError      = ""; 
 
- $message = "";
- $message2 = "";
 
  $users             = array();
+ $paymentIDs        = array();
  $usersName         = array();
  $usersBlok         = array();
  $usersDoorNo       = array();
  $usersEmail        = array();
  $usersPhoneNo      = array();
- $usersPhoneNo2     = array();
- $usersArrivalDavet = array();
+ $duesName          = array();
+ $amount            = array();
+ $duesStartDate     = array();
+ $whenPaid          = array();
 
 $arr=array();
 
@@ -29,59 +26,24 @@ function test_input($data)
 }  
 
 $counter = 0;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
- //**************************** */
- if (empty($_POST['leavingDate'])) {
-  $inputLeavingDateError = "Leaving date is required";
-}else {
-  $inputLeavingDate      = test_input($_POST['leavingDate']);
-}
-//**************************** */
-if (empty($_POST['ramo'])) {
-  $inputUserIdError = "Member Checking is required";
-}else {
-  $inputUserId      = test_input($_POST['ramo']);
-}
- 
- 
- 
-}
 
- 
-  
 
-  $sql1 = "SELECT * FROM users, apartments WHERE apartments.aUserID = users.userID 
-  AND apartments.apartmentIsFull=1 ORDER BY apartments.blok , apartments.doorNo";
+
+  $sql1 = "SELECT * FROM users, apartments , dues , payments WHERE apartments.aUserID = users.userID 
+  AND users.userID = payments.userNo AND payments.duesID = dues.duesID
+  AND apartments.apartmentIsFull=1 AND payments.isPaid = 1 ORDER BY  payments.whenPaid DESC";
   $result =$conn->query($sql1);
-  
-  $sql2 = "UPDATE apartments SET apartmentIsFull = 0 , aLeavingDate = '$inputLeavingDate'
-   WHERE aUserID = '$inputUserId' ";
- if ($conn->query($sql2) === TRUE) {
-  $message= "Member Moved Out";
-  $message2= successMessage($message);
 
- }
-
-function successMessage($message){
-  $message2 = "<div class='alert alert-success'>
-  <strong>Success!</strong> $message
-</div>";
-  return $message2;
-}
-function failMessage($message){
-  $message2 = "<div class='alert alert-danger'>
-  <strong>Error!</strong> $message
-   </div>";
-  return $message2;
-}
  
 ?>
 
 <DOCTYPE! html>
 <html>
     <head>
-     <link rel="stylesheet" href="ortak.css">
+  
+
+     <link rel="stylesheet" href="../ortak.css" >    
 </head>
     <body>
     <?php if ($result->num_rows > 0) 
@@ -89,91 +51,88 @@ function failMessage($message){
       <div class="table-responsive">
         <div class="abc">
          <br>
-          <form  method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " id="myForm" onSubmit="window.location.reload()">
+          <form  method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?> " id="myForm" >
            <input class= form-control id="myInput"  type="text" placeholder=Search..>
            <table class=record_table> 
             <tr> 
-             <th> #   </th>
+             
              <th> ID </th>
              <th> NAME </th>
              <th> BLOK </th> 
              <th> DOOR NO </th>
              <th>E-Mail</th>
              <th>Phone Number</th>
-             <th>Second Phone Number</th>
-             <th>Arrival Date</th>
+             <th>Dues Name</th>
+             <th>Amount</th>
+             <th>Starts Date </th>
+             <th>Paid Date</th>
             </tr>
             <tbody id="myTable">
              <div class="form-check">
               <?php 
                
                       for($i=0 ;$row = $result->fetch_assoc(); $i++){
+                          
                           $users[$i]             = $row["userID"];
                           $usersName[$i]         = $row["uname"];
                           $usersBlok[$i]         = $row["blok"];
                           $usersDoorNo[$i]       = $row["doorNo"];
                           $usersEmail[$i]        = $row["eMail"];
                           $usersPhoneNo[$i]      = $row["phoneNo"];
-                          $usersPhoneNo2[$i]     = $row["phoneNo2"];
-                          $usersArrivalDavet[$i] = $row["aArrivalDate"];
+                          $duesName[$i]          = $row["duesName"];
+                          $amount[$i]            = $row["amount"];
+                          $duesStartDate[$i]     = $row["startsDate"];
+                          $paymentIDs[$i]        = $row["paymentID"];
+                          $whenPaid[$i]          = $row["whenPaid"];
+                          
                       }
               
                     
+           
                                    
               ?>
               <div id="checkboxGroup">
-               <?php   for ($t=0; $t < count($users) ; $t++)
+               <?php   for ($t=0; $t < count($paymentIDs) ; $t++)
                 { 
     
                ?>
                <tr class="table-success">
                 
-                <td><input type="checkbox" name="ramo" value="<?php echo $users[$t] ?>">  </td>
-                <td> <?php echo $users[$t]; ?></td>
+                
+                <td><?php echo $paymentIDs[$t]; ?></td>
                 <td><?php echo $usersName[$t];  ?></td>
                 <td><?php echo $usersBlok[$t];?></td>
                 <td><?php echo $usersDoorNo[$t] ; ?></td>
                 <td><?php echo   $usersEmail[$t] ;?></td>
                 <td><?php echo  $usersPhoneNo[$t]; ?></td>
-                <td><?php echo  $usersPhoneNo2[$t];?></td>
-                <td><?php echo $usersArrivalDavet[$t]; ?></td>
+                <td><?php echo  $duesName[$t];?></td>
+                <td><?php echo $amount[$t]. " TL"; ?></td>
+                <td><?php echo $duesStartDate[$t]; ?></td>
+                <td><?php echo $whenPaid[$t]; ?>   </td>
               
                </tr>   
                    
                <?php 
                 } 
              }
+           
               ?>
               </div>  <br>
              </div>
             </tbody>
           </table>
-          <span class="error"><?php echo $inputUserIdError;?></span>
+        
         </div>
       </div>
-      <div class="ree">
-      <div class="form-group">
-       <label for="leavingDate" class="col-sm-9 control-label">Leaving Date</label>
-       <div class="col-sm-3">  
-           <input type="date" name="leavingDate"  class="form-control"
-           value="<?php echo $inputLeavingDate; ?>" >
-            <span class="error"><?php echo $inputLeavingDateError;?></span>
-       </div>
-      </div>  
-       <?php echo $message2; ?>
-      <div class ="form-group" style="padding-left:14px">
-       <button type="submit" class="btn btn-primary" name="ramo " > Move Out</button>
+  
+      </form>
+     
      </div>
-   </form>
- </div>
       
     
 
          <script>
-         $(document).on('click', 'input[type="checkbox"]', function() {      
-    $('input[type="checkbox"]').not(this).prop('checked', false);      
-});
-         
+                
          
          
                 $(document).ready(function () {
@@ -202,5 +161,10 @@ function failMessage($message){
              
               
          </script>
- </body>
+    </body>
 </html>
+
+<?php 
+
+ 
+?>  
