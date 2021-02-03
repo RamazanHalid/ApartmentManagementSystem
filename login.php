@@ -66,7 +66,7 @@ session_start();
            $_SESSION["adminID"] = $row["no"];
           
 
-           header("Location: adminHomePage.php");
+           header("Location: Admin/adminHomePage.php");
            exit();
          } 
         else 

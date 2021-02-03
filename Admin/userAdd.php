@@ -2,7 +2,7 @@
      @version 27.12.2020 -->
 <?php
    include "adminMainPage.php";
-   include "connection.php";
+
 
    $bloks = array("A","B","C","D");
    $apartments = array();
@@ -253,7 +253,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="addUser.css">
+    <link rel="stylesheet" href="../addUser.css">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

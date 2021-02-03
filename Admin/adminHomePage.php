@@ -1,6 +1,6 @@
 <?php   
 include "adminMainPage.php";
-include "connection.php";
+
 
  $sqlForVaultCash = "SELECT SUM(dues.amount) as moneySum FROM payments , dues WHERE dues.duesID = payments.duesID AND  payments.isPaid = 1";
  $result = $conn->query($sqlForVaultCash);

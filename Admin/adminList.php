@@ -1,6 +1,6 @@
 <?php
 include "adminMainPage.php";
-include "connection.php";
+
 
  $sqlListAllAdmins = "SELECT * FROM admins 
  ORDER BY  isActive DESC";
